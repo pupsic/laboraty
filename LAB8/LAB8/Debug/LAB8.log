@@ -1,0 +1,4 @@
+﻿  LAB8.cpp
+E:\Универ\Программирование\ЛАБЫ\LAB8\LAB8\LAB8.cpp(10,15): warning C4101: 'r2': unreferenced local variable
+E:\Универ\Программирование\ЛАБЫ\LAB8\LAB8\LAB8.cpp(10,11): warning C4101: 'r1': unreferenced local variable
+  LAB8.vcxproj -> E:\Универ\Программирование\ЛАБЫ\LAB8\Debug\LAB8.exe
