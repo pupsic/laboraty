@@ -1,0 +1,5 @@
+﻿  LAB10.cpp
+E:\Универ\Программирование\laboraty\LAB10\LAB10\LAB10.cpp(17,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Универ\Программирование\laboraty\LAB10\LAB10\LAB10.cpp(28,9): warning C4101: 'copy_chek': unreferenced local variable
+E:\Универ\Программирование\laboraty\LAB10\LAB10\LAB10.cpp(25,12): warning C4101: 'j': unreferenced local variable
+  LAB10.vcxproj -> E:\Универ\Программирование\laboraty\LAB10\Debug\LAB10.exe

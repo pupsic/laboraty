@@ -1,5 +1,5 @@
 ﻿  LAB7.cpp
-E:\Универ\Программирование\ЛАБЫ\LAB7\LAB7\LAB7.cpp(14,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-E:\Универ\Программирование\ЛАБЫ\LAB7\LAB7\LAB7.cpp(13,9): warning C4101: 'copy_chek': unreferenced local variable
-E:\Универ\Программирование\ЛАБЫ\LAB7\LAB7\LAB7.cpp(10,12): warning C4101: 'j': unreferenced local variable
-  LAB7.vcxproj -> E:\Универ\Программирование\ЛАБЫ\LAB7\Debug\LAB7.exe
+E:\Универ\Программирование\laboraty\LAB7\LAB7\LAB7.cpp(14,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Универ\Программирование\laboraty\LAB7\LAB7\LAB7.cpp(13,9): warning C4101: 'copy_chek': unreferenced local variable
+E:\Универ\Программирование\laboraty\LAB7\LAB7\LAB7.cpp(10,12): warning C4101: 'j': unreferenced local variable
+  LAB7.vcxproj -> E:\Универ\Программирование\laboraty\LAB7\Debug\LAB7.exe

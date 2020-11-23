@@ -2,12 +2,12 @@
 #include <iostream>
 using namespace std;
 
-#define S 9 // любое нечетное число
+#define S 11 // любое нечетное число
 int Ar[S][S]; /* матрица */
 
 int main(void) {
     short l, r;  /* текущие индексы */
-    short r1, r2; /* граничные номера столбцов */
+    
     short even=0;    
     short odd=0;     /* текущий член ЛП */
     //центральные точки:
