@@ -14,7 +14,7 @@ int main(void) {
     int* Ar;       /* указатель на начало массива */
 
     srand(time(NULL));
-    size = rand() % 201 - 50;
+    size = rand() % 201 + 50;
     printf("size=%d\n", size);
 
     /* выделения памяти */
