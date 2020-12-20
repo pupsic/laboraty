@@ -1,0 +1,3 @@
+﻿  LAB9A.cpp
+E:\Универ\Программирование\laboraty\LAB9A\LAB9A\LAB9A.cpp(21,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  LAB9A.vcxproj -> E:\Универ\Программирование\laboraty\LAB9A\Debug\LAB9A.exe

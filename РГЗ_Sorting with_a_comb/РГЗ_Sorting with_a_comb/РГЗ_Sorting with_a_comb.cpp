@@ -2,7 +2,7 @@
 #include <chrono>
 using namespace std;
 using namespace std::chrono;
-#define N 40
+#define N 5
 
 int partition(int arr[], int low, int high)
 {

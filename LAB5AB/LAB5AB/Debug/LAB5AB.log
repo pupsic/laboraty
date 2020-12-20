@@ -1,0 +1,4 @@
+﻿  LAB5AB.cpp
+E:\Универ\Программирование\laboraty\LAB5AB\LAB5AB\LAB5AB.cpp(8,41): warning C4101: 'imaginaryPart': unreferenced local variable
+E:\Универ\Программирование\laboraty\LAB5AB\LAB5AB\LAB5AB.cpp(8,31): warning C4101: 'realPart': unreferenced local variable
+  LAB5AB.vcxproj -> E:\Универ\Программирование\laboraty\LAB5AB\Debug\LAB5AB.exe

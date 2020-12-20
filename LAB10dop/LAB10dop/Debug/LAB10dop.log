@@ -1,0 +1,3 @@
+﻿  LAB10dop.cpp
+E:\Универ\Программирование\laboraty\LAB10dop\LAB10dop\LAB10dop.cpp(63,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  LAB10dop.vcxproj -> E:\Универ\Программирование\laboraty\LAB10dop\Debug\LAB10dop.exe
