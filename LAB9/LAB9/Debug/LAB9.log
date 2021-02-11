@@ -1,3 +1,5 @@
 ﻿  LAB9.cpp
-E:\Универ\Программирование\laboraty\LAB9\LAB9\LAB9.cpp(27,16): warning C4476: 'printf' : unknown type field character ')' in format specifier
+E:\Универ\Программирование\laboraty\LAB9\LAB9\LAB9.cpp(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\Программирование\laboraty\LAB9\LAB9\LAB9.cpp(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\Программирование\laboraty\LAB9\LAB9\LAB9.cpp(95,37): warning C4804: '<': unsafe use of type 'bool' in operation
   LAB9.vcxproj -> E:\Универ\Программирование\laboraty\LAB9\Debug\LAB9.exe

@@ -1,0 +1,6 @@
+﻿  S2Lab2.cpp
+E:\Универ\Программирование\laboraty\S2Lab2\S2Lab2\S2Lab2.cpp(2,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\Программирование\laboraty\S2Lab2\S2Lab2\S2Lab2.cpp(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\Программирование\laboraty\S2Lab2\S2Lab2\S2Lab2.cpp(95,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Универ\Программирование\laboraty\S2Lab2\S2Lab2\S2Lab2.cpp(98,37): warning C4804: '<': unsafe use of type 'bool' in operation
+  S2Lab2.vcxproj -> E:\Универ\Программирование\laboraty\S2Lab2\Debug\S2Lab2.exe

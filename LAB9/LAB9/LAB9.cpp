@@ -1,77 +1,132 @@
 ﻿#include <iostream>
-#include <stdio.h>
-#include <string.h>
+#include <windows.h>;
+#include <iomanip>;
+#include <crtdbg.h>
 using namespace std;
-
-/* strcpy: копирует t в s; версия 3 (с указателями) */
-void custom_strcpy(char* s, char* t)
+struct Sel
 {
-    while (*s++ = *t++);
-}
-/* Описание структуры, которая представляет монастырь */
-struct mon {
-    char Substance[15]; /* Вещество */
-    char type;       /* Тип */
-    int wet;       /* Влажность */
-    float Coef;      /* Коэффициент */
-} mm[10]; /* определение массива Вещества */
-int main(void) {
-    setlocale(LC_ALL, "Rus");
-    struct mon x; /* рабочая переменная */
-    int n;    /* количество элементов в массиве */
-    int i, j; /* текущие индексы в массиве */
-    int m;    /* индекс минимального элемента */
-    float sqx;/* рабочая переменная */
-     /* Ввод данных */
-    for (n = 0; n < 10; n++) {
-        printf("%d. Введите: Вещество, Тип, Влажность(%), Коэффициент >",
-            n + 1);
-        cin >> mm[n].Substance;
-        if (!strcmp(mm[n].Substance, "***")) break;
-        cin >> mm[n].type;
-        cin >> mm[n].wet;
-        /* Внимание! Мы обходим ошибку в системе программирования */
-        cin >> sqx; mm[n].Coef = sqx;
+    string name;
+    string type;
+    unsigned int s = 0;
+    unsigned int yd = 0;
+};
+
+int manual(Sel* mc, int n)
+{
+    system("cls");
+    for (n; ; n++)
+    {
+        cout << "Чтобы прекратить ввод введите *" << endl;
+        cout << "Введите имя: ";
+        cin >> mc[n].name;
+        if (mc[n].name == "*") break;
+        cout << "\nВведите тип культуры: ";
+        cin >> mc[n].type;
+        cout << "\nВведите площадь культуры: ";
+        cin >> mc[n].s;
+        cout << "\nВведите урожайность культуры: ";
+        cin >> mc[n].yd;
+        system("cls");
     }
-    /* Вывод таблицы */
-    printf("---------------------------------------------\n");
-    printf("| Коэффициенты теплопроводимости материаллов |\n");
-    printf("|--------------------------------------------|\n");
-    printf("| Вещество  | Тип   |Влажность | Коэффициент |\n");
-    printf("|           |       |          |             |\n");
-    printf("|-----------|-------|----------|-------------|\n");
-    /* вывод строк фактических данных */
-    for (i = 0; i < n; i++)
-        printf("| %9s |   %c   |      %3d | %-5.1f       |\n",
-            mm[i].Substance, mm[i].type, mm[i].wet, mm[i].Coef);
-    printf("---------------------------------------------\n");
-    /* сортировка массива */
-    for (i = 0; i < n - 1; i++) {
+
+    return n;
+}
+
+int avto(Sel* mc, int n)
+{
+    system("cls");
+    for (n; n < n + rand() % 7; n++)
+    {
+        mc[n].name = rand() % 25 + 65;
+        for (int i = 0; i < rand() % 5 + 4; i++) mc[n].name += rand() % 25 + 97;
+        mc[n].type = rand() % 25 + 65;
+        mc[n].s = rand() % 20000 + 2000;
+        mc[n].yd = rand() % 20000 + 2000;
+    }
+
+    return n;
+}
+
+void print(Sel* mc, int n)
+{
+    system("cls");
+
+    cout << "\n---------------------------------------------------------\n";
+    cout << ("|               Сельскохозяйственные культуры           |\n");
+    cout << ("|-------------------------------------------------------|\n");
+    cout << ("| Наименование | Тип | Посевная площадь |  Урожайность  |\n");
+    cout << ("|              |     |       (га)       |    (ц/га)     |\n");
+    cout << ("---------------------------------------------------------\n");
+    for (int i = 0; i < n; i++)
+    {
+        cout << "|" << setw(14) << mc[i].name << "|" << setw(5) << mc[i].type << "|"
+            << setw(18) << mc[i].s << "|" << setw(15) << mc[i].yd << "|\n";
+    }
+    cout << "---------------------------------------------------------\n";
+    system("pause");
+}
+
+void sortirovka(Sel* mc, int n)
+{
+    Sel temp;
+    int m;
+    for (int i = 0; i < n - 1; i++) {
         m = i; /* минимальный элемент - первый */
-        for (j = i + 1; j < n; j++)
-            /* если текущий элемент > минимального,
+        for (int j = i + 1; j < n; j++)
+            /* если текущий элемент < минимального,
                он становится минимальным */
-            if (strcmp(mm[m].Substance, mm[j].Substance) > 0) m = j;
+            if (mc[m].name > mc[j].name)
+            {
+                m = j;
+                //cout << mc[i].name << " " << mc[j].name;
+            }
         if (m > i) {
-            /* перестановка первого и минимального элементов */
-            custom_strcpy(x.Substance, mm[i].Substance); x.type = mm[i].type;
-            x.wet = mm[i].wet; x.Coef = mm[i].Coef;
-            custom_strcpy(mm[i].Substance, mm[m].Substance); mm[i].type = mm[m].type;
-            mm[i].wet = mm[m].wet; mm[i].Coef = mm[m].Coef;
-            custom_strcpy(mm[m].Substance, x.Substance); mm[m].type = x.type;
-            mm[m].wet = x.wet; mm[m].Coef = x.Coef;
+            temp = mc[i];
+            mc[i] = mc[m];
+            mc[m] = temp;
         }
     }
-    /* Вывод таблицы */
-    printf("---------------------------------------------\n");
-    printf("| Коэффициенты теплопроводимости материаллов |\n");
-    printf("|--------------------------------------------|\n");
-    printf("| Вещество  | Тип   |Влажность | Коэффициент |\n");
-    printf("|           |       |          |             |\n");
-    printf("|-----------|-------|----------|-------------|\n");
-    for (i = 0; i < n; i++)
-        printf("| %9s |   %c   |      %3d | %-5.1f       |\n",
-            mm[i].Substance, mm[i].type, mm[i].wet, mm[i].Coef);
-    printf("---------------------------------------------\n");
+}
+
+int main(void)
+{
+    Sel* mc = new Sel[100];
+    int n = 0;
+    for (bool status = 0; status < 1;)
+    {
+        system("cls");
+        cout << "1 - Ручной ввод списка" << endl;
+        cout << "2 - Автоматический ввод списка" << endl;
+        cout << "3 - Сортировка" << endl;
+        cout << "4 - Печать" << endl;
+        cout << "5 - Выход" << endl;
+        int input;
+        cin >> input;
+        switch (input)
+        {
+        case 1:
+            n = manual(mc, n);
+            break;
+        case 2:
+            n = avto(mc, n);
+            break;
+        case 3:
+            sortirovka(mc, n);
+            break;
+        case 4:
+            print(mc, n);
+            break;
+        case 5:
+            status = 1;
+            break;
+        default:
+            cout << "Error";
+            system("pause");
+            break;
+        }
+
+    }
+    delete mc;
+    _CrtDumpMemoryLeaks();
     return 0;
 }
