@@ -1,0 +1,10 @@
+﻿  funcs.cpp
+E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\globals.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\funcs.cpp(21,17): error C4996: 'ctime': This function or variable may be unsafe. Consider using ctime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\funcs.cpp(108,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  globals.cpp
+E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\globals.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  S2Lab3.cpp
+E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\globals.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\S2Lab3.cpp(11,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\S2Lab3.cpp(14,37): warning C4804: '<': unsafe use of type 'bool' in operation
