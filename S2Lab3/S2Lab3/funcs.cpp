@@ -4,12 +4,22 @@
 #include <string>
 #include <fstream>
 #include <ctime> 
-
+#include<sstream> 
 using namespace std;
 
 int exis_struct = 0;
 
-void full_info(mon* mc, int n) {
+FCT* fct = new FCT[NUM_OF_STRUCT];
+
+string id(int index){
+    stringstream ss;
+    ss << index;
+    string s;
+    ss >> s;
+    return s;
+}
+
+void full_info(mon* mc, int n,FCT *fct_) {
     system("cls");
     cout << "Number of all elements at the moment: " << n << endl;
     cout << "Number of all existing elements:      " << exis_struct << endl;
@@ -21,7 +31,10 @@ void full_info(mon* mc, int n) {
         cout << setw(12) << mc[i].name << " :";
         printf("%s", str);
     }
-    
+    for (int i = 0; !fct_[i].id.empty(); i++)
+    {
+        cout<<fct[i].name<<' '<< fct[i].time_called<<endl;
+    }
     system("pause");
 }
 
@@ -50,6 +63,10 @@ void find_element(mon* mc,int n) {
         }
     }
     cout << "------------------------------------------------\n";
+    int index = 0;
+    fct[index].id = id(index);
+    fct[index].name = "find_element";
+    fct[index].time_called++;
     system("pause");
 }
 
@@ -75,7 +92,10 @@ int delete_stract(mon* mc, int n) {
             //break; //break out the loop
         }
     }
-
+    int index = 1;
+    fct[index].id = id(index);
+    fct[index].name = "delete_stract";
+    fct[index].time_called++;
     return n;
 }
 
@@ -96,13 +116,13 @@ int enter_keyboard(mon* mc, int n)
         cin >> mc[n].wet;
         cout << "\nEnter coefficient: ";
         cin >> mc[n].coef;
-        
-
-
         system("cls");
     }
 
-
+    int index = 2;
+    fct[index].id = id(index);
+    fct[index].name = "enter_keyboard";
+    fct[index].time_called++;
 
     exis_struct++;
     return n;
@@ -140,8 +160,10 @@ int enter_random(mon* mc, int n)
 
     exis_struct++;
     n++;
-
-
+    int index = 3;
+    fct[index].id = id(index);
+    fct[index].name = "enter_random";
+    fct[index].time_called++;
 
     return n;
 }
@@ -163,7 +185,10 @@ void print(mon* mc, int n)
     cout << "--------------------------------------------------\n";
     system("pause");
 
-
+    int index = 4;
+    fct[index].id = id(index);
+    fct[index].name = "print";
+    fct[index].time_called++;
 }
 
 void sortirovka(mon* mc, int n)
@@ -185,6 +210,9 @@ void sortirovka(mon* mc, int n)
             mc[m] = temp;
         }
     }
-
+    int index = 5;
+    fct[index].id = id(index);
+    fct[index].name = "sortirovka";
+    fct[index].time_called++;
 
 }

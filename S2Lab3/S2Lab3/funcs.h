@@ -15,8 +15,8 @@ int delete_stract(mon* mc,int n);
 
 void find_element(mon*mc, int n);
 
-void full_info(mon* mc, int n);
+void full_info(mon* mc, int n,FCT* fct);
 
-
+string id(int index);
 
 #endif // __FUNCS_H__

@@ -6,7 +6,11 @@
 #define NUM_OF_STRUCT 100
 using namespace std;
 
-
+struct FCT {
+    string id;
+    string name;
+    int time_called=0;
+};
 
 struct mon
 {
@@ -15,6 +19,7 @@ struct mon
     unsigned int wet = 0;
     double coef = 0;
     time_t timeinfo;
+    
 };       // глобальная переменная
 
 #endif // __GLOBALS_H__

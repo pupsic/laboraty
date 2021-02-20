@@ -1,7 +1,6 @@
 #include <iostream>
 #include "funcs.h"
 #include "globals.h"
-
 using namespace std;
 
 
@@ -11,11 +10,16 @@ int main(void)
     setlocale(LC_ALL, "Rus");
     srand(time(NULL));
     mon* mc = new mon[NUM_OF_STRUCT];
-
+    FCT* fct = new FCT[NUM_OF_STRUCT];
+    for (int i = 0; i <= 7; i++)
+    {
+        fct[i].id = id(i);
+    }
     int n = 0;
     for (bool status = 0; status < 1;)
     {
         system("cls");
+        
         cout << "1 - Manual list entry" << endl;
         cout << "2 - Automatic list entry" << endl;
         cout << "3 - Sort" << endl;
@@ -24,6 +28,7 @@ int main(void)
         cout << "6 - Delete" << endl;
         cout << "7 - Full information" << endl;
         cout << "8 - Exit" << endl;
+
         int input;
         cin >> input;
         switch (input)
@@ -47,7 +52,7 @@ int main(void)
             n = delete_stract(mc,n);
             break;
         case 7:
-            full_info(mc,n);
+            full_info(mc,n,fct);
 
             break;
         case 8:
