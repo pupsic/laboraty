@@ -6,6 +6,7 @@
 #define NUM_OF_STRUCT 100
 using namespace std;
 
+
 struct FCT {
     string id;
     string name;

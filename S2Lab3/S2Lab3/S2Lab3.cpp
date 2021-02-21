@@ -3,7 +3,23 @@
 #include "globals.h"
 using namespace std;
 
+string menu[] = {
+    "Manual list entry",
+    "Automatic list entry",
+    "Sort" ,
+    "Print" ,
+    "Find element",
+    "Delete" ,
+    "Full information",
+    "Exit"
+};
 
+void call_menu(int elements_menu) {
+    for (int i=0; i< elements_menu; i++)
+    {
+        cout << i << " - " << menu[i] << endl;
+    }
+}
 
 int main(void)
 {
@@ -11,51 +27,43 @@ int main(void)
     srand(time(NULL));
     mon* mc = new mon[NUM_OF_STRUCT];
     FCT* fct = new FCT[NUM_OF_STRUCT];
-    for (int i = 0; i <= 7; i++)
+    int elements_menu = 0;
+    for (; !menu[elements_menu].empty(); elements_menu++)
     {
-        fct[i].id = id(i);
+        fct[elements_menu].id = id(elements_menu);
     }
     int n = 0;
     for (bool status = 0; status < 1;)
     {
         system("cls");
-        
-        cout << "1 - Manual list entry" << endl;
-        cout << "2 - Automatic list entry" << endl;
-        cout << "3 - Sort" << endl;
-        cout << "4 - Print" << endl;
-        cout << "5 - Find element" << endl;
-        cout << "6 - Delete" << endl;
-        cout << "7 - Full information" << endl;
-        cout << "8 - Exit" << endl;
+        call_menu(elements_menu);
 
         int input;
         cin >> input;
         switch (input)
         {
-        case 1:
+        case 0:
             n = enter_keyboard(mc, n);
             break;
-        case 2:
+        case 1:
             n=enter_random(mc,n);
             break;
-        case 3:
+        case 2:
             sortirovka(mc, n);
             break;
-        case 4:
+        case 3:
             print(mc, n);
             break;
-        case 5:
+        case 4:
             find_element(mc, n);
             break;
-        case 6:
+        case 5:
             n = delete_stract(mc,n);
             break;
-        case 7:
+        case 6:
             full_info(mc,n,fct);
-
             break;
-        case 8:
+        case 7:
             status = 1;
             break;
         default:

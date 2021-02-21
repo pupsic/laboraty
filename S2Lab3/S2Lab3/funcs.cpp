@@ -30,10 +30,12 @@ void full_info(mon* mc, int n,FCT *fct_) {
         ctime_s(str, sizeof(str), &mc[i].timeinfo);
         cout << setw(12) << mc[i].name << " :";
         printf("%s", str);
+
     }
+    cout << "Number of calling functions:          " << endl;
     for (int i = 0; !fct_[i].id.empty(); i++)
     {
-        cout<<fct[i].name<<' '<< fct[i].time_called<<endl;
+        cout<< setw(12) << fct[i].name<<": "<< fct[i].time_called<<endl;
     }
     system("pause");
 }

@@ -1,0 +1,13 @@
+﻿  KURSOVAY.cpp
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(55,27): error C2062: type 'int' unexpected
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(55,43): warning C4552: '<': result of expression not used
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(55,71): error C2059: syntax error: ')'
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(57,9): error C2065: 'copy_step': undeclared identifier
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(57,25): error C2059: syntax error: ';'
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(60,33): error C2065: 'copy_step': undeclared identifier
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(61,33): error C2065: 'copy_step': undeclared identifier
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(66,5): error C2059: syntax error: 'return'
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(67,1): error C2059: syntax error: '}'
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(67,1): error C2143: syntax error: missing ';' before '}'
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(69,36): error C2143: syntax error: missing ';' before '{'
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(69,36): error C2447: '{': missing function header (old-style formal list?)
