@@ -11,23 +11,30 @@ using namespace std;
 bool TryParse(const string& symbol);
 int Priority(const string& c);
 bool isOperator(const string& c);
-vector<string> ToRPN(string infix);
+vector<string> StringToRPN(string infix);
 
 
-bool is_number(const std::string& s)
-{
-    std::string::const_iterator it = s.begin();
-    bool out = true;
-    char c = '.';
-    size_t found = s.find(c);
-    while (it != s.end() && std::isdigit(*it)) { 
-        if ((found != string::npos) && out) {
-            ++it;
-            out = false;
-        }
-        ++it; }
-    return !s.empty() && it == s.end();
+bool is_sign(string str) {
+    std::string plus = "+";
+    std::string minus = "-";
+    std::string mult = "*";
+    std::string div = "/";
+    if (str.find(plus) != string::npos) {
+        return true;
+    }
+    else if (str.find(minus) != string::npos) {
+        return true;
+    }
+    else if (str.find(mult) != string::npos) {
+        return true;
+    }
+    else if (str.find(div) != string::npos) {
+        return true;
+    }
+    else
+        return false;
 }
+
 
 
 float Opertion(string str,float a, float b) {
@@ -45,10 +52,13 @@ float Opertion(string str,float a, float b) {
         return a * b;
     }
     else if (str.find(div) != string::npos) {
+        if (b == 0) {
+            cout << "error: cannot be divided by zero"<<endl;
+        }
         return a / b;
     }
     else
-        return -1;
+        return 0;
 }
 
 string delete_paren(string str) {
@@ -61,42 +71,60 @@ string delete_paren(string str) {
     return str;
 }
 
-int main()
-{
-    string infix = "(2.5 + ( ( 2 + 2 ) * 3 ))";//our infix expression
-    infix = delete_paren(infix);
-    vector<string> outputList = ToRPN(infix);
+void print_vetor(vector<string> outputList) {
+    cout << "vector: ";
+    for (int out = 0; outputList.size() > out; out++) {
+        cout << " " << outputList[out] << " ";
+    }
+    cout << endl;
+}
+
+vector<string> count_RPN(vector<string> outputList){
     string operation;
-    
+
     float a;
     float b;
     int current_step;
 
-
-    for (int step = 0; outputList.size()!=1; step++)
+    for (int step = 0; outputList.size() != 1; step++)
     {
 
         operation = outputList[step];
-        if (!is_number(operation)) {
+        //print_vetor(outputList);
+        if (is_sign(operation)) {
             current_step = step;
 
             step--;
-            a = stof(outputList[step]);
+            b = stof(outputList[step]);
             outputList.erase(outputList.begin() + current_step);
 
             step--;
-            b = stof(outputList[step]);
+            a = stof(outputList[step]);
             outputList.erase(outputList.begin() + --current_step);
-
+            /*cout << "a: " << a << endl;
+            cout << "b: " << b << endl;
+            cout <<"result: "<< Opertion(operation, a, b)<<endl;*/
             outputList[--current_step] = to_string(Opertion(operation, a, b));
-            
+
         }
     }
+    return outputList;
+}
+
+
+
+int main()
+{
+    string infix;// = "12.3 * 3 + 1 * 0 + 2 / 0 + ( 5 * 1 ) / 0 + 1";//our infix expression
+    cout << "Enter expresion, after every symbol put space \"( ( a + b ) * c )\":"<<endl;
+    getline(cin, infix);
+    vector<string> outputList = StringToRPN(infix);
+    outputList = count_RPN(outputList);
     cout <<infix <<" = " <<outputList[0];
     return 0;
 }
 
-vector<string> ToRPN(string infix) {
+vector<string> StringToRPN(string infix) {
     istringstream iss(infix);
     vector<string> tokens;//store the tokens here
     while (iss)
