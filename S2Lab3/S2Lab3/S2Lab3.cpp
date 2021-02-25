@@ -9,13 +9,14 @@ string menu[] = {
     "Sort" ,
     "Print" ,
     "Find element",
-    "Delete" ,
+    "Delete",
+    "Delete all",
     "Full information",
     "Exit"
 };
 
 void call_menu(int elements_menu) {
-    for (int i=0; i< elements_menu; i++)
+    for (int i=0; i < elements_menu; i++)
     {
         cout << i << " - " << menu[i] << endl;
     }
@@ -27,11 +28,7 @@ int main(void)
     srand(time(NULL));
     mon* mc = new mon[NUM_OF_STRUCT];
     FCT* fct = new FCT[NUM_OF_STRUCT];
-    int elements_menu = 0;
-    for (; !menu[elements_menu].empty(); elements_menu++)
-    {
-        fct[elements_menu].id = id(elements_menu);
-    }
+    int elements_menu = 9;
     int n = 0;
     for (bool status = 0; status < 1;)
     {
@@ -61,9 +58,13 @@ int main(void)
             n = delete_stract(mc,n);
             break;
         case 6:
-            full_info(mc,n,fct);
+            n = delete_all_stract(mc, n);
+            mc = new mon[NUM_OF_STRUCT];
             break;
         case 7:
+            full_info(mc,n,fct);
+            break;
+        case 8:
             status = 1;
             break;
         default:

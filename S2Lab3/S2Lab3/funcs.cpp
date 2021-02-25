@@ -73,6 +73,13 @@ void find_element(mon* mc,int n) {
 }
 
 
+int delete_all_stract(mon* mc, int n) {
+    system("cls");
+    delete [] mc;
+    n = 0;
+    return n;
+}
+
 int delete_stract(mon* mc, int n) {
     system("cls");
     string title; //string to store the title of the book that should be removed 
