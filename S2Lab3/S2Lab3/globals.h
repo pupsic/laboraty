@@ -3,6 +3,7 @@
 #include <iomanip>;
 #include <time.h>
 #include <string>
+#include <windows.h> 
 #define NUM_OF_STRUCT 100
 using namespace std;
 
