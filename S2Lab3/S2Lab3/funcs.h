@@ -28,11 +28,13 @@ int delete_stract_by_type(mon* mc, int n);
 int delete_stract_by_coefficient(mon* mc, int n);
 
 int delete_all_stract(mon* mc, int n);
+void change_element(mon* mc, int n);
 void print_line(mon* mc, int i);
-void find_element_name(mon*mc, int n);
-void find_element_type(mon* mc, int n);
-void find_element_wet(mon* mc, int n);
-void find_element_coef(mon* mc, int n);
+int find_collection(mon* mc, int i);
+int find_element_name(mon*mc, int n);
+int find_element_type(mon* mc, int n);
+int find_element_wet(mon* mc, int n);
+int find_element_coef(mon* mc, int n);
 
 void full_info(mon* mc, int n,FCT* fct);
 

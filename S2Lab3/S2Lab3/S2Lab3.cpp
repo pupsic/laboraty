@@ -3,23 +3,23 @@
 #include "globals.h"
 using namespace std;
 
-string menu[] = {
-    "Manual list entry",
-    "Automatic list entry",
-    "Sort" ,
-    "Print" ,
-    "Find element",
-    "Delete",
-    "Delete all",
-    "Full information",
-    "Exit"
-};
+//HANDLE  hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-void call_menu(int elements_menu) {
-    for (int i=0; i < elements_menu; i++)
-    {
-        cout << i << " - " << menu[i] << endl;
-    }
+void call_menu() {
+    HANDLE  hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, 10);
+    cout << "0 -" << "Manual list entry" << endl;
+    cout << "1 -" << "Automatic list entry" << endl;
+    cout << "2 -" << "Sort" << endl;
+    cout << "3 -" << "Print" << endl;
+    cout << "4 -" << "Find element" << endl;
+    SetConsoleTextAttribute(hConsole, 6);
+    cout << "5 -" << "Change element" << endl;
+    SetConsoleTextAttribute(hConsole, 4);
+    cout << "6 -" << "Delete" << endl;
+    cout << "7 -" << "Delete all" << endl;
+    cout << "8 -" << "Full information" << endl;
+    cout << "9 -" << "Exit" << endl;
 }
 
 int main(void)
@@ -27,15 +27,14 @@ int main(void)
     setlocale(LC_ALL, "Rus");
     srand(time(NULL));
     HANDLE  hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, 15);
+    
     mon* mc = new mon[NUM_OF_STRUCT];
     FCT* fct = new FCT[NUM_OF_STRUCT];
-    int elements_menu = 9;
     int n = 0;
     for (bool status = 0; status < 1;)
     {
         system("cls");
-        call_menu(elements_menu);
+        call_menu();
 
         int input;
         cin >> input;
@@ -49,6 +48,7 @@ int main(void)
             break;
         case 2:
             sortirovka_by_name_down(mc, n);
+            SetConsoleTextAttribute(hConsole, 10);
             for (bool status_sort = 0; status_sort < 1;)
             {
                 system("cls");
@@ -195,46 +195,15 @@ int main(void)
             print(mc, n);
             break;
         case 4:
-            
-            for (bool status_find = 0; status_find < 1;)
-            {
-                system("cls");
-                cout << "0 - find by name" << endl;
-                cout << "1 - find by type" << endl;
-                cout << "2 - find by wet" << endl;
-                cout << "3 - find by coefficient" << endl;
-                cout << "4 - exit" << endl;
-
-                int input;
-                cin >> input;
-                switch (input)
-                {
-                case 0:
-                    find_element_name(mc, n);
-                    break;
-                case 1:
-                    find_element_type(mc, n);
-                    break;
-                case 2:
-                    find_element_wet(mc, n);
-                    break;
-                case 3:
-                    find_element_coef(mc, n);
-                    break;
-                case 4:
-                    status_find = 1;
-                    break;
-                default:
-                    cout << "Error";
-                    system("pause");
-                    break;
-                }
-                break;
-            }
+            SetConsoleTextAttribute(hConsole, 10);
+            find_collection(mc, n);
 
             break;
         case 5:
-            
+            change_element(mc, n);
+            break;
+        case 6:
+            SetConsoleTextAttribute(hConsole, 4);
             for (bool status_del = 0; status_del < 1;)
             {
                 system("cls");
@@ -271,14 +240,14 @@ int main(void)
                 break;
             }
             break;
-        case 6:
+        case 7:
             n = delete_all_stract(mc, n);
             mc = new mon[NUM_OF_STRUCT];
             break;
-        case 7:
+        case 8:
             full_info(mc,n,fct);
             break;
-        case 8:
+        case 9:
             status = 1;
             break;
         default:
