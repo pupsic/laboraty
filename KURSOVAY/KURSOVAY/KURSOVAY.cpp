@@ -116,9 +116,59 @@ vector<string> count_RPN(vector<string> outputList){
 int main()
 {
     string infix;// = "12.3 * 3 + 1 * 0 + 2 / 0 + ( 5 * 1 ) / 0 + 1";//our infix expression
-    cout << "Enter expresion, after every symbol put space \"( ( a + b ) * c )\":"<<endl;
-    getline(cin, infix);
+
+    for (int status = 0; status != 1 ; )
+    {
+        cout << "Enter expresion, after every symbol put space \"( ( a + b ) * c )\":" << endl;
+        getline(cin, infix);
+        int left = 0;
+        for (int i = 0; i < infix.size(); i++)
+            if (infix[i] == '(') left++;
+
+        int right = 0;
+        for (int i = 0; i < infix.size(); i++)
+            if (infix[i] == ')') right++;
+
+        if (left==right)
+        {
+            status = 1;
+        }
+        else
+        {
+            cout << "Incorect enter, Reenter expresion:" << endl;
+            system("pause");
+        }
+
+        system("cls");
+    }
+    
     vector<string> outputList = StringToRPN(infix);
+
+    for (int status = 0; status != 1; )
+    {
+
+        int elements = outputList.size();
+
+        int sign = 0;
+        for (int i = 0; i < elements; i++)
+            if (is_sign(outputList[i])) 
+                sign++;
+
+        double temp = elements * 1.0 / 2;
+        temp = round(temp);
+        if ((temp-sign)==1)
+        {
+            cout << "corect enter"<< endl;
+            status = 1;
+        }
+        else
+        {
+            cout << "Incorect enter, Reenter expresion:" << endl;
+            return -1;
+        }
+
+    }
+
     outputList = count_RPN(outputList);
     cout <<infix <<" = " <<outputList[0];
     return 0;

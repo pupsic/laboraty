@@ -1,3 +1,5 @@
 ﻿  KURSOVAY.cpp
-E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(91,41): warning C4018: '>': signed/unsigned mismatch
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(76,41): warning C4018: '>': signed/unsigned mismatch
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(125,27): warning C4018: '<': signed/unsigned mismatch
+E:\Универ\Программирование\laboraty\KURSOVAY\KURSOVAY\KURSOVAY.cpp(129,27): warning C4018: '<': signed/unsigned mismatch
   KURSOVAY.vcxproj -> E:\Универ\Программирование\laboraty\KURSOVAY\Debug\KURSOVAY.exe
