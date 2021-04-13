@@ -100,7 +100,7 @@ int find_element_name(mon* mc,int n) {
     int find = 0;
     for (int i = 0; i < n; i++)
     {
-        if (mc[i].name == title) //if this is the book
+        if (!mc[i].name.find(title)) //if this is the book
         {
             print_line(mc, i);
             find = i;

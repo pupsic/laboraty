@@ -274,6 +274,7 @@ int main()
             if (checkExtraChar(temp)) {
                 status++;
             }
+            system("pause");
         }
         system("cls");
     }

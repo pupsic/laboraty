@@ -1,11 +1,6 @@
-﻿  S2Lab3.cpp
+﻿  funcs.cpp
 E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\globals.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\S2Lab3.cpp(28,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\S2Lab3.cpp(34,27): warning C4804: '<': unsafe use of type 'bool' in operation
-E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\S2Lab3.cpp(52,40): warning C4804: '<': unsafe use of type 'bool' in operation
-E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\S2Lab3.cpp(66,53): warning C4804: '<': unsafe use of type 'bool' in operation
-E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\S2Lab3.cpp(96,53): warning C4804: '<': unsafe use of type 'bool' in operation
-E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\S2Lab3.cpp(125,53): warning C4804: '<': unsafe use of type 'bool' in operation
-E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\S2Lab3.cpp(154,53): warning C4804: '<': unsafe use of type 'bool' in operation
-E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\S2Lab3.cpp(207,39): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\funcs.cpp(26,32): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\funcs.cpp(115,31): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\Программирование\laboraty\S2Lab3\S2Lab3\funcs.cpp(398,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   S2Lab3.vcxproj -> E:\Универ\Программирование\laboraty\S2Lab3\Debug\S2Lab3.exe
