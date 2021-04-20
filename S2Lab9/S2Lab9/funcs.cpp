@@ -113,16 +113,33 @@ void linked_list::printTable(node* n) {
     system("pause");
 }
 
-linked_list::node* linked_list::getNode(int id, node*& n) {
+linked_list::node* linked_list::getNode(int index, node* head)
+{
+    // allocating space
+    node* nodeByIndex = head;
 
-    node*& copy = n;
-    for (int i = 0; i < id; i++)
+    for (int step = 0; step < index && nodeByIndex != NULL; step++)
     {
-        if (copy != NULL) {
-            copy = copy->next;
-        }
+
+        nodeByIndex = nodeByIndex->next;
+
     }
-    return copy;
+
+    return nodeByIndex;
+}
+
+
+int linked_list::getSize(node*& head) {
+
+    node*& copy = head;
+    int size = 0;
+    while (copy != NULL) {
+
+        copy = copy->next;
+        size++;
+    }
+
+    return size;
 }
 void linked_list::printLine(node* n)
 {
@@ -130,34 +147,31 @@ void linked_list::printLine(node* n)
         << setw(7) << n->wet << "|" << setw(14) << n->coef << "|\n";
 }
 
-void linked_list::insert(node* prev_node,data*& Data){
-    node* newNode = new node;
-    newNode->name = Data->name;
-    newNode->type = Data->type;
-    newNode->wet = Data->wet;
-    newNode->coef = Data->coef;
-
-
-    if (head == NULL)
-    {
-        cout << "Not exist node";
-        return;
-    }
-    else if (prev_node == NULL)
+void linked_list::insert(node* prev_node, data*& Data)
+{
+    if (prev_node == NULL)
     {
         cout << "the given previous node cannot be NULL";
         return;
     }
 
+    /* 2. allocate new node */
+    node* newNode = new node;
+
+    /* 3. put in the data */
+    newNode->name = Data->name;
+    newNode->type = Data->type;
+    newNode->wet = Data->wet;
+    newNode->coef = Data->coef;
+
+    /* 4. Make next of new node as next of prev_node */
     newNode->next = prev_node->next;
+
+    /* 5. move the next of prev_node as new_node */
     prev_node->next = newNode;
-    
-
-
-
-    
-    
 }
+      
+   
 
 void linked_list::addNode(data*& Data)
 {
@@ -180,36 +194,53 @@ void linked_list::addNode(data*& Data)
 }
 
 
-void linked_list::addEnd(data*& Data, node*& head, node*& tail)
+void linked_list::addEnd(node** head_ref, data*& Data)
 {
     node* newNode = new node;
+
+    node* last = *head_ref; /* used in step 5*/
+
+    /* 2. put in the data */
     newNode->name = Data->name;
     newNode->type = Data->type;
     newNode->wet = Data->wet;
     newNode->coef = Data->coef;
-    newNode->next = nullptr;
-    if (head == nullptr) head = tail = newNode;
-    else { 
-        tail->next = newNode;
-        tail = newNode;
+
+    /* 3. This new node is going to be
+    the last node, so make next of
+    it as NULL*/
+    newNode->next = NULL;
+
+    /* 4. If the Linked List is empty,
+    then make the new node as head */
+    if (*head_ref == NULL)
+    {
+        *head_ref = newNode;
+        return;
     }
+
+    /* 5. Else traverse till the last node */
+    while (last->next != NULL)
+        last = last->next;
+
+    /* 6. Change the next of last node */
+    last->next = newNode;
+    return;
 }
 
-void linked_list::addBeginning(data*& Data, node*& head, node*& tail)
+void linked_list::addBeginning(node** head_ref, data*& Data)
 {
     node* newNode = new node;
     newNode->name = Data->name;
     newNode->type = Data->type;
     newNode->wet = Data->wet;
     newNode->coef = Data->coef;
-    if (head == nullptr) {
-        newNode->next = nullptr;
-        head = tail = newNode;
-    }
-    else {
-        newNode->next = head;
-        head = newNode;
-    }
+
+    /* 3. Make next of new node as head */
+    newNode->next = (*head_ref);
+
+    /* 4. move the head to point to the new node */
+    (*head_ref) = newNode;
 }
 
 

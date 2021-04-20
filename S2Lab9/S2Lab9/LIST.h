@@ -42,21 +42,20 @@ public:
 
     void addNode(data*& Data);
     void insert(node* prev_node, data*& Data);
-    void addEnd(data*& Data, node*& head, node*& tail);
-    void addBeginning(data*& Data, node*& head, node*& tail);
+    void addEnd(node** head_ref, data*& Data);
+    void addBeginning(node** head_ref, data*& Data);
     void deleteBeginning(node*& head);
     void deleteEnd(node*& head, node*& tail);
 
     void messageErrorEmpty(node*& head);
     void messageErrorFound(node*& head);
 
-
+    int getSize(node*& head);
     void deleteSpecificName(string node_location, node*& head, node*& tail);
     void deleteSpecificType(char node_location, node*& head, node*& tail);
     void deleteSpecificWet(unsigned int node_location, node*& head, node*& tail);
     void deleteSpecificCoef(double node_location, node*& head, node*& tail);
-
-    node* getNode(int id,node* &n);
+    node* getNode(int index, node* head);
     void printTable(node* n);
 
     node*& get_head(){
