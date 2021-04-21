@@ -2,6 +2,10 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+
+#include <fstream>
+
+
 using namespace std;
 
 void search_collection(linked_list a) {
@@ -49,6 +53,26 @@ void search_collection(linked_list a) {
     system("cls");
 
 }
+
+void writeToFile(linked_list a) {
+    char text[200]="fdsafasdf sadf sa";
+
+    fstream file;
+    file.open("example.xls", ios::out | ios::in);
+
+    cout << "Write text to be written on file." << endl;
+    cin.getline(text, sizeof(text));
+
+    // Writing on file
+    file << text << endl;
+    
+    // Reding from file
+    file >> text;
+    cout << text << endl;
+    file.close();
+    system("pause");
+}
+
 
 
 void linked_list::search(string type,string input, node* head)
@@ -113,6 +137,156 @@ void linked_list::printTable(node* n) {
     system("pause");
 }
 
+
+void linked_list::MergeSort(string byColumn,node** headRef)
+{
+    node* head = *headRef;
+    node* a;
+    node* b;
+
+    /* Base case -- length 0 or 1 */
+    if ((head == NULL) || (head->next == NULL)) {
+        return;
+    }
+
+    /* Split head into 'a' and 'b' sublists */
+    FrontBackSplit(head, &a, &b);
+
+    /* Recursively sort the sublists */
+    MergeSort(byColumn, &a);
+    MergeSort(byColumn, &b);
+
+    /* answer = merge the two sorted lists together */
+    if (byColumn == "name") {
+        *headRef = SortedMergeName(a, b);
+    }
+    else if(byColumn == "type") {
+        *headRef = SortedMergeType(a, b);
+    }
+    else if (byColumn == "wet") {
+        *headRef = SortedMergeWet(a, b);
+    }
+    else if (byColumn == "coef") {
+        *headRef = SortedMergeCoef(a, b);
+    }
+}
+
+
+linked_list::node* linked_list::SortedMergeType(node* a, node* b)
+{
+    node* result = NULL;
+
+    /* Base cases */
+    if (a == NULL)
+        return (b);
+    else if (b == NULL)
+        return (a);
+
+    /* Pick either a or b, and recur */
+    if (a->type <= b->type) {
+        result = a;
+        result->next = SortedMergeType(a->next, b);
+    }
+    else {
+        result = b;
+        result->next = SortedMergeType(a, b->next);
+    }
+    return (result);
+}
+
+linked_list::node* linked_list::SortedMergeWet(node* a, node* b)
+{
+    node* result = NULL;
+
+    /* Base cases */
+    if (a == NULL)
+        return (b);
+    else if (b == NULL)
+        return (a);
+
+    /* Pick either a or b, and recur */
+    if (a->wet <= b->wet) {
+        result = a;
+        result->next = SortedMergeWet(a->next, b);
+    }
+    else {
+        result = b;
+        result->next = SortedMergeWet(a, b->next);
+    }
+    return (result);
+}
+
+linked_list::node* linked_list::SortedMergeCoef(node* a, node* b)
+{
+    node* result = NULL;
+
+    /* Base cases */
+    if (a == NULL)
+        return (b);
+    else if (b == NULL)
+        return (a);
+
+    /* Pick either a or b, and recur */
+    if (a->coef <= b->coef) {
+        result = a;
+        result->next = SortedMergeCoef(a->next, b);
+    }
+    else {
+        result = b;
+        result->next = SortedMergeCoef(a, b->next);
+    }
+    return (result);
+}
+
+linked_list::node* linked_list::SortedMergeName(node* a, node* b)
+{
+    node* result = NULL;
+
+    /* Base cases */
+    if (a == NULL)
+        return (b);
+    else if (b == NULL)
+        return (a);
+
+    /* Pick either a or b, and recur */
+    if (a->name <= b->name) {
+        result = a;
+        result->next = SortedMergeName(a->next, b);
+    }
+    else {
+        result = b;
+        result->next = SortedMergeName(a, b->next);
+    }
+    return (result);
+}
+
+
+void linked_list::FrontBackSplit(node* source,
+    node** frontRef, node** backRef)
+{
+    node* fast;
+    node* slow;
+    slow = source;
+    fast = source->next;
+
+    /* Advance 'fast' two nodes, and advance 'slow' one node */
+    while (fast != NULL) {
+        fast = fast->next;
+        if (fast != NULL) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+
+    /* 'slow' is before the midpoint in the list, so split it in two
+    at that point. */
+    *frontRef = source;
+    *backRef = slow->next;
+    slow->next = NULL;
+}
+
+
+
 linked_list::node* linked_list::getNode(int index, node* head)
 {
     // allocating space
@@ -131,7 +305,7 @@ linked_list::node* linked_list::getNode(int index, node* head)
 
 int linked_list::getSize(node*& head) {
 
-    node*& copy = head;
+    node* copy = head;
     int size = 0;
     while (copy != NULL) {
 
@@ -149,11 +323,7 @@ void linked_list::printLine(node* n)
 
 void linked_list::insert(node* prev_node, data*& Data)
 {
-    if (prev_node == NULL)
-    {
-        cout << "the given previous node cannot be NULL";
-        return;
-    }
+
 
     /* 2. allocate new node */
     node* newNode = new node;
@@ -163,7 +333,7 @@ void linked_list::insert(node* prev_node, data*& Data)
     newNode->type = Data->type;
     newNode->wet = Data->wet;
     newNode->coef = Data->coef;
-
+    newNode->next = NULL;
     /* 4. Make next of new node as next of prev_node */
     newNode->next = prev_node->next;
 
@@ -205,7 +375,7 @@ void linked_list::addEnd(node** head_ref, data*& Data)
     newNode->type = Data->type;
     newNode->wet = Data->wet;
     newNode->coef = Data->coef;
-
+    
     /* 3. This new node is going to be
     the last node, so make next of
     it as NULL*/
@@ -283,27 +453,60 @@ void linked_list::deleteBeginning(node*& head)
 
 }
 
-void linked_list::deleteEnd(node*& head, node*& tail)
+void linked_list::deleteNode(node* head, node* n)
 {
-    if (head == nullptr) {
-        std::cout << std::endl << std::endl;
-        std::cout << "\t" << "LL-> The List Is Empty. Deletion Not Possible.";
-        std::cout << std::endl << std::endl;
+    // When node to be deleted is head node 
+    if (head == n)
+    {
+        if (head->next == NULL)
+        {
+            cout << "There is only one node." <<
+                " The list can't be made empty ";
+            return;
+        }
+
+        /* Copy the data of next node to head */
+        head->name = head->next->name;
+        head->type = head->next->type;
+        head->wet = head->next->wet;
+        head->coef = head->next->coef;
+        // store address of next node 
+        n = head->next;
+
+        // Remove the link of next node 
+        head->next = head->next->next;
+
+        // free memory 
+        free(n);
+
         return;
     }
-    node* temp = head;
-    if (temp->next == nullptr) {
-        head = nullptr;
-        delete temp;
+
+
+    // When not first node, follow 
+    // the normal deletion process 
+
+    // find the previous node 
+    node* prev = head;
+    while (prev->next != NULL && prev->next != n)
+        prev = prev->next;
+
+    // Check if node really exists in Linked List 
+    if (prev->next == NULL)
+    {
+        cout << "\nGiven node is not present in Linked List";
+        return;
     }
-    else {
-        while (temp->next != tail) temp = temp->next;
-        tail = temp;
-        temp = temp->next;
-        tail->next = nullptr;
-        delete temp;
-    }
+
+    // Remove node from Linked List 
+    prev->next = prev->next->next;
+
+    // Free memory 
+    free(n);
+
+    return;
 }
+
 
 void linked_list::deleteSpecificName(string node_location, node*& head, node*& tail)
 {
