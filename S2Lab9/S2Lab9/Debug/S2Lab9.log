@@ -1,1 +1,12 @@
-﻿  S2Lab9.vcxproj -> E:\Универ\laboraty\S2Lab9\Debug\S2Lab9.exe
+﻿  S2Lab9.cpp
+E:\Универ\laboraty\S2Lab9\S2Lab9\S2Lab9.cpp(25,27): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\laboraty\S2Lab9\S2Lab9\S2Lab9.cpp(35,40): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\laboraty\S2Lab9\S2Lab9\S2Lab9.cpp(89,40): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\laboraty\S2Lab9\S2Lab9\S2Lab9.cpp(140,40): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\laboraty\S2Lab9\S2Lab9\S2Lab9.cpp(186,42): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\laboraty\S2Lab9\S2Lab9\S2Lab9.cpp(206,50): warning C4804: '<': unsafe use of type 'bool' in operation
+  funcs.cpp
+E:\Универ\laboraty\S2Lab9\S2Lab9\funcs.cpp(13,32): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\laboraty\S2Lab9\S2Lab9\funcs.cpp(59,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+  S2Lab9.vcxproj -> E:\Универ\laboraty\S2Lab9\Debug\S2Lab9.exe

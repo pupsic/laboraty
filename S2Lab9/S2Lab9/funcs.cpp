@@ -54,23 +54,69 @@ void search_collection(linked_list a) {
 
 }
 
-void writeToFile(linked_list a) {
-    char text[200]="fdsafasdf sadf sa";
 
-    fstream file;
-    file.open("example.xls", ios::out | ios::in);
+linked_list::data* linked_list::readFromFile() {
+    srand(time(NULL));
+    data* Data = new data;
+    string myText;
+    ifstream MyReadFile("test.txt");
+    int leath = 0;
+    int four = 0;
+    for (; getline(MyReadFile, myText); leath++)
+        if (leath % 4 == 0) { four++; };
 
-    cout << "Write text to be written on file." << endl;
-    cin.getline(text, sizeof(text));
+    MyReadFile.close();
+    ifstream MyReadFile1("test.txt");
 
-    // Writing on file
-    file << text << endl;
+    int rand_sub =  rand() % four;
+    leath = 0;
+    leath = 4 * rand_sub;
+    four = 0;
+    four = leath + 4;
+
+    string buffer;
+
+    for (int i = leath; i< four; i++)
+    {
+        getline(MyReadFile1, buffer);
+        if (i==leath)
+        {
+            Data->name = buffer;
+        }
+        if (i == (leath+1))
+        {
+            Data->type = buffer[0];
+        }
+        if (i == (leath + 2))
+        {
+            Data->wet = atoi(buffer.c_str());
+        }
+        if (i == (leath + 3))
+        {
+            Data->coef = atof(buffer.c_str());
+        }
+            
+    }
+    MyReadFile1.close();
+    return Data;
+}
+
+void writeToFile(linked_list::data data) {
     
-    // Reding from file
-    file >> text;
-    cout << text << endl;
-    file.close();
-    system("pause");
+    std::ofstream outfile;
+
+    outfile.open("test.txt", std::ios_base::app); // append instead of overwrite
+    outfile << data.name;
+    outfile << "\n";
+    outfile << data.type;
+    outfile << "\n";
+    outfile << data.wet;
+    outfile << "\n";
+    outfile << data.coef;
+    outfile << "\n";
+    // Close the file
+    outfile.close();
+
 }
 
 
@@ -88,7 +134,7 @@ void linked_list::search(string type,string input, node* head)
     if (type == "str") {
         for (; temp!=NULL; temp = temp->next)
         {
-            if (temp->name==input) {
+            if (temp->Data.name==input) {
                 printLine(temp);
             }           
         }
@@ -96,7 +142,7 @@ void linked_list::search(string type,string input, node* head)
     if (type == "char") {
         for (; temp != NULL; temp = temp->next)
         {
-            if (temp->type == input[0]) {
+            if (temp->Data.type == input[0]) {
                 printLine(temp);
             }
         }
@@ -104,7 +150,7 @@ void linked_list::search(string type,string input, node* head)
     if (type == "int") {
         for (; temp != NULL; temp = temp->next)
         {
-            if (temp->wet== stoi(input)) {
+            if (temp->Data.wet== stoi(input)) {
                 printLine(temp);
             }
         }
@@ -113,7 +159,7 @@ void linked_list::search(string type,string input, node* head)
     if (type == "double") {
         for (; temp != NULL; temp = temp->next)
         {
-            if (temp->coef == stod(input)) {
+            if (temp->Data.coef == stod(input)) {
                 printLine(temp);
             }
         }
@@ -183,7 +229,7 @@ linked_list::node* linked_list::SortedMergeType(node* a, node* b)
         return (a);
 
     /* Pick either a or b, and recur */
-    if (a->type <= b->type) {
+    if (a->Data.type <= b->Data.type) {
         result = a;
         result->next = SortedMergeType(a->next, b);
     }
@@ -205,7 +251,7 @@ linked_list::node* linked_list::SortedMergeWet(node* a, node* b)
         return (a);
 
     /* Pick either a or b, and recur */
-    if (a->wet <= b->wet) {
+    if (a->Data.wet <= b->Data.wet) {
         result = a;
         result->next = SortedMergeWet(a->next, b);
     }
@@ -227,7 +273,7 @@ linked_list::node* linked_list::SortedMergeCoef(node* a, node* b)
         return (a);
 
     /* Pick either a or b, and recur */
-    if (a->coef <= b->coef) {
+    if (a->Data.coef <= b->Data.coef) {
         result = a;
         result->next = SortedMergeCoef(a->next, b);
     }
@@ -249,7 +295,7 @@ linked_list::node* linked_list::SortedMergeName(node* a, node* b)
         return (a);
 
     /* Pick either a or b, and recur */
-    if (a->name <= b->name) {
+    if (a->Data.name <= b->Data.name) {
         result = a;
         result->next = SortedMergeName(a->next, b);
     }
@@ -317,8 +363,8 @@ int linked_list::getSize(node*& head) {
 }
 void linked_list::printLine(node* n)
 {
-    cout << "|" << setw(15) << n->name << "|" << setw(10) << n->type << "|"
-        << setw(7) << n->wet << "|" << setw(14) << n->coef << "|\n";
+    cout << "|" << setw(15) << n->Data.name << "|" << setw(10) << n->Data.type << "|"
+        << setw(7) << n->Data.wet << "|" << setw(14) << n->Data.coef << "|\n";
 }
 
 void linked_list::insert(node* prev_node, data*& Data)
@@ -329,10 +375,10 @@ void linked_list::insert(node* prev_node, data*& Data)
     node* newNode = new node;
 
     /* 3. put in the data */
-    newNode->name = Data->name;
-    newNode->type = Data->type;
-    newNode->wet = Data->wet;
-    newNode->coef = Data->coef;
+    newNode->Data.name = Data->name;
+    newNode->Data.type = Data->type;
+    newNode->Data.wet = Data->wet;
+    newNode->Data.coef = Data->coef;
     newNode->next = NULL;
     /* 4. Make next of new node as next of prev_node */
     newNode->next = prev_node->next;
@@ -346,10 +392,10 @@ void linked_list::insert(node* prev_node, data*& Data)
 void linked_list::addNode(data*& Data)
 {
     node* newNode = new node;
-    newNode->name = Data->name;
-    newNode->type = Data->type;
-    newNode->wet =  Data->wet;
-    newNode->coef = Data->coef;
+    newNode->Data.name = Data->name;
+    newNode->Data.type = Data->type;
+    newNode->Data.wet =  Data->wet;
+    newNode->Data.coef = Data->coef;
     newNode->next = NULL;
     if (head == NULL)
     {
@@ -371,10 +417,10 @@ void linked_list::addEnd(node** head_ref, data*& Data)
     node* last = *head_ref; /* used in step 5*/
 
     /* 2. put in the data */
-    newNode->name = Data->name;
-    newNode->type = Data->type;
-    newNode->wet = Data->wet;
-    newNode->coef = Data->coef;
+    newNode->Data.name = Data->name;
+    newNode->Data.type = Data->type;
+    newNode->Data.wet = Data->wet;
+    newNode->Data.coef = Data->coef;
     
     /* 3. This new node is going to be
     the last node, so make next of
@@ -401,10 +447,10 @@ void linked_list::addEnd(node** head_ref, data*& Data)
 void linked_list::addBeginning(node** head_ref, data*& Data)
 {
     node* newNode = new node;
-    newNode->name = Data->name;
-    newNode->type = Data->type;
-    newNode->wet = Data->wet;
-    newNode->coef = Data->coef;
+    newNode->Data.name = Data->name;
+    newNode->Data.type = Data->type;
+    newNode->Data.wet = Data->wet;
+    newNode->Data.coef = Data->coef;
 
     /* 3. Make next of new node as head */
     newNode->next = (*head_ref);
@@ -466,10 +512,10 @@ void linked_list::deleteNode(node* head, node* n)
         }
 
         /* Copy the data of next node to head */
-        head->name = head->next->name;
-        head->type = head->next->type;
-        head->wet = head->next->wet;
-        head->coef = head->next->coef;
+        head->Data.name = head->next->Data.name;
+        head->Data.type = head->next->Data.type;
+        head->Data.wet = head->next->Data.wet;
+        head->Data.coef = head->next->Data.coef;
         // store address of next node 
         n = head->next;
 
@@ -513,7 +559,7 @@ void linked_list::deleteSpecificName(string node_location, node*& head, node*& t
     messageErrorEmpty(head);
     node* temp1 = head;
     node* temp2 = nullptr;
-    while (temp1->name != node_location) {
+    while (temp1->Data.name != node_location) {
         messageErrorFound(temp1);
         temp2 = temp1;
         temp1 = temp1->next;
@@ -543,7 +589,7 @@ void linked_list::deleteSpecificType(char node_location, node*& head, node*& tai
     messageErrorEmpty(head);
     node* temp1 = head;
     node* temp2 = nullptr;
-    while (temp1->type != node_location) {
+    while (temp1->Data.type != node_location) {
         messageErrorFound(temp1);
         temp2 = temp1;
         temp1 = temp1->next;
@@ -573,7 +619,7 @@ void linked_list::deleteSpecificWet(unsigned int node_location, node*& head, nod
     messageErrorEmpty(head);
     node* temp1 = head;
     node* temp2 = nullptr;
-    while (temp1->wet != node_location) {
+    while (temp1->Data.wet != node_location) {
         messageErrorFound(temp1);
         temp2 = temp1;
         temp1 = temp1->next;
@@ -603,7 +649,7 @@ void linked_list::deleteSpecificCoef(double node_location, node*& head, node*& t
     messageErrorEmpty(head);
     node* temp1 = head;
     node* temp2 = nullptr;
-    while (temp1->coef != node_location) {
+    while (temp1->Data.coef != node_location) {
         messageErrorFound(temp1);
         temp2 = temp1;
         temp1 = temp1->next;

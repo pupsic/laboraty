@@ -21,6 +21,7 @@ int main()
     int i = 0;
     linked_list a;
     linked_list::data* Data = new linked_list::data;
+
     for (bool status = 0; status < 1;)
     {
         system("cls");
@@ -85,7 +86,54 @@ int main()
             system("cls");
             break;
         case 1:
-            
+            for (bool status_find = 0; status_find < 1;)
+            {
+                system("cls");
+                cout << "0 - add to start" << endl;
+                cout << "1 - add to end" << endl;
+                cout << "2 - add to any place" << endl;
+                cout << "3 - exit" << endl;
+                int input;
+                cin >> input;
+                system("cls");
+
+                Data = a.readFromFile();
+
+                system("cls");
+                switch (input)
+                {
+                case 0:
+
+                    a.addBeginning(&a.get_head(), Data);
+                    break;
+                case 1:
+                    a.addEnd(&a.get_head(), Data);
+                    break;
+                case 2:
+                    cout << "input id of place: " << endl;
+                    int id;
+                    cin >> id;
+                    if (id == 0)
+                    {
+                        a.addBeginning(&a.get_head(), Data);
+                    }
+                    else
+                    {
+                        id--;
+                        a.insert(a.getNode(id, a.get_head()), Data);
+                    }
+                    break;
+                case 3:
+                    status_find = 1;
+                    break;
+                default:
+                    cout << "Error";
+                    system("pause");
+                    break;
+                }
+                break;
+            }
+            system("cls");
             break;
         case 2:
 
@@ -177,13 +225,13 @@ int main()
                             a.deleteSpecificName(val, a.get_head(), a.get_tail());
                             break;
                         case 1:
-                            a.deleteSpecificName(val, a.get_head(), a.get_tail());
+                            a.deleteSpecificType(val[0], a.get_head(), a.get_tail());
                             break;
                         case 2:
-                            a.deleteSpecificName(val, a.get_head(), a.get_tail());
+                            a.deleteSpecificWet(atoi(val.c_str()), a.get_head(), a.get_tail());
                             break;
                         case 3:
-                            a.deleteSpecificName(val, a.get_head(), a.get_tail());
+                            a.deleteSpecificCoef(atof(val.c_str()), a.get_head(), a.get_tail());
                             break;
                         case 4:
                             status_delete = 1;
@@ -209,7 +257,12 @@ int main()
             }
             break;
         case 6:
-            writeToFile(a);
+            cout << "input data: " << endl;
+            cin >> Data->name;
+            cin >> Data->type;
+            cin >> Data->wet;
+            cin >> Data->coef;
+            writeToFile(*Data);
             break;
         case 7:
             status = 1;
@@ -220,30 +273,6 @@ int main()
             break;
         }
     }
-    //for (int i = 0; i < 5; i++)
-    //{
-    //    Data->coef = i;
-    //    a.addEnd(&a.get_head(), Data);
-    //}
-    //for (int i = 0; i < 5; i++)
-    //{
-    //    a.deleteNode(a.get_head(), a.getNode(a.getSize(a.get_head()) - 1, a.get_head()));
-    //}
-    //for (int i = 0; i < 5; i++)
-    //{
-    //    Data->coef = i;
-    //    a.addBeginning(&a.get_head(), Data);
-    //}
-
-    //for (int i = 0; i < 10 ; i++)
-    //{
-    //    Data->name = "hello";
-    //    Data->coef = i;
-    //    a.addBeginning(&a.get_head(), Data);
-    //}
-    //a.MergeSort("coef", &a.get_head());
-    //a.printTable(a.get_head());
-    
 }
 
 

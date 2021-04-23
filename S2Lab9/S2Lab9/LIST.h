@@ -4,17 +4,20 @@
 
 using namespace std;
 
-
-
 class linked_list
 {
-private:
-    struct node
+public:
+    struct data
     {
         string name;
         char type;
         unsigned int wet = 0;
         double coef = 0;
+    };
+private:
+    struct node
+    {
+        data Data;
         node* next;
       
     };
@@ -26,14 +29,6 @@ private:
     node* SortedMergeCoef(node* a, node* b);
     void FrontBackSplit(node* source, node** frontRef, node** backRef);
 public:
-    struct data
-    {
-        string name;
-        char type;
-        unsigned int wet = 0;
-        double coef = 0;
-
-    };
 
     linked_list()
     {
@@ -60,7 +55,7 @@ public:
     void deleteSpecificWet(unsigned int node_location, node*& head, node*& tail);
     void deleteSpecificCoef(double node_location, node*& head, node*& tail);
     void MergeSort(string byColumn, node** headRef);
-    
+    data* readFromFile();
     node* getNode(int index, node* head);
     void printTable(node* n);
 
@@ -76,6 +71,6 @@ public:
 };
 
 void search_collection(linked_list a);
-void writeToFile(linked_list a);
+void writeToFile(linked_list::data data);
 
 #endif // __FUNCS_H__
