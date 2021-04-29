@@ -1,0 +1,20 @@
+﻿  Linked_list_two.cpp
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Linked_list_two.cpp(1,11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Linked_list_two.cpp(2,11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Linked_list_two.cpp(3,11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Linked_list_two.cpp(4,11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Linked_list_two.cpp(67,30): warning C4804: '<': unsafe use of type 'bool' in operation
+  Release_List.cpp
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(2,11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(3,11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(4,11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(5,11): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(60,29): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(106,29): warning C4804: '<': unsafe use of type 'bool' in operation
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(378,6): warning C4101: 'i': unreferenced local variable
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(419,15): warning C4101: 'i': unreferenced local variable
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(449,15): warning C4101: 'i': unreferenced local variable
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(480,15): warning C4101: 'i': unreferenced local variable
+E:\Универ\laboraty\Linked_list_two\Linked_list_two\Release_List.cpp(511,15): warning C4101: 'i': unreferenced local variable
+  Generating Code...
+  Linked_list_two.vcxproj -> E:\Универ\laboraty\Linked_list_two\x64\Debug\Linked_list_two.exe

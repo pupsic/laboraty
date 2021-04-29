@@ -21,7 +21,7 @@ int main()
     int i = 0;
     linked_list a;
     linked_list::data* Data = new linked_list::data;
-
+    
     for (bool status = 0; status < 1;)
     {
         system("cls");
