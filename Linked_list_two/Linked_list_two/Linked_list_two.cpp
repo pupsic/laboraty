@@ -79,16 +79,16 @@ dd:
 			switch (input)
 			{
 			case 0:
-				list->bubbleSort(list->get_head());
+				list->sort();
 				break;
 			case 1:
-				list->bubbleSortType(list->get_head());
+				list->sortWet();
 				break;
 			case 2:
-				list->bubbleSortWet(list->get_head());
+				list->sortWet();
 				break;
 			case 3:
-				list->bubbleSortCoef(list->get_head());
+				list->sortCoef();
 				break;
 			case 4:
 				status_sort = 1;
@@ -101,7 +101,7 @@ dd:
 			break;
 		}
 	
-		list->bubbleSort(list->get_head());
+		
 		break;
 	case 9:
 

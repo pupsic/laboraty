@@ -414,196 +414,577 @@ void linked_list::ReadFile() {
 	system("cls");
 
 }
-void linked_list::bubbleSortCoef(node* start)
+
+void linked_list::frontBackSplit(node* theHead, node*& frontRef, node*& backRef)
 {
-	int swapped, i;
-	struct node* ptr1;
-	struct node* lptr = NULL;
+	node* fast;
+	node* slow;
 
-	/* Checking for empty list */
-	if (start == NULL)
-		return;
-
-	do
-	{
-		swapped = 0;
-		ptr1 = start;
-
-		while (ptr1->next != lptr)
-		{
-			if (ptr1->coef > ptr1->next->coef)
-			{
-				swap(ptr1->name, ptr1->next->name);
-				swap(ptr1->type, ptr1->next->type);
-				swap(ptr1->wet, ptr1->next->wet);
-				swap(ptr1->coef, ptr1->next->coef);
-				swapped = 1;
-			}
-			ptr1 = ptr1->next;
-		}
-		lptr = ptr1;
-	} while (swapped);
-}
-void linked_list::bubbleSortType(node* start)
-{
-	int swapped, i;
-	struct node* ptr1;
-	struct node* lptr = NULL;
-
-	/* Checking for empty list */
-	if (start == NULL)
-		return;
-
-	do
-	{
-		swapped = 0;
-		ptr1 = start;
-
-		while (ptr1->next != lptr)
-		{
-			if (ptr1->type > ptr1->next->type)
-			{
-				swap(ptr1->name, ptr1->next->name);
-				swap(ptr1->type, ptr1->next->type);
-				swap(ptr1->wet, ptr1->next->wet);
-				swap(ptr1->coef, ptr1->next->coef);
-				swapped = 1;
-			}
-			ptr1 = ptr1->next;
-		}
-		lptr = ptr1;
-	} while (swapped);
-}
-
-void linked_list::bubbleSort(node* start)
-{
-	int swapped, i;
-	struct node* ptr1;
-	struct node* lptr = NULL;
-
-	/* Checking for empty list */
-	if (start == NULL)
-		return;
-
-	do
-	{
-		swapped = 0;
-		ptr1 = start;
-
-		while (ptr1->next != lptr)
-		{
-			if (ptr1->name > ptr1->next->name)
-			{
-				swap(ptr1->name, ptr1->next->name);
-				swap(ptr1->type, ptr1->next->type);
-				swap(ptr1->wet, ptr1->next->wet);
-				swap(ptr1->coef, ptr1->next->coef);
-				swapped = 1;
-			}
-			ptr1 = ptr1->next;
-		}
-		lptr = ptr1;
-	}     while (swapped);
-}
-
-void linked_list::bubbleSortWet(node* start)
-{
-	int swapped, i;
-	struct node* ptr1;
-	struct node* lptr = NULL;
-
-	/* Checking for empty list */
-	if (start == NULL)
-		return;
-
-	do
-	{
-		swapped = 0;
-		ptr1 = start;
-
-		while (ptr1->next != lptr)
-		{
-			if (ptr1->wet > ptr1->next->wet)
-			{
-				swap(ptr1->name, ptr1->next->name);
-				swap(ptr1->type, ptr1->next->type);
-				swap(ptr1->wet, ptr1->next->wet);
-				swap(ptr1->coef, ptr1->next->coef);
-				swapped = 1;
-			}
-			ptr1 = ptr1->next;
-		}
-		lptr = ptr1;
-	} while (swapped);
-}
-
-void linked_list::sortedInsert(node** head_ref, node* newNode)
-{
-	struct node* current;
-
-	// if list is empty
-	if (*head_ref == NULL)
-		*head_ref = newNode;
-
-	// if the node is to be inserted at the beginning
-	// of the doubly linked list
-	else if ((*head_ref)->type >= newNode->type) {
-		newNode->next = *head_ref;
-		newNode->next->prev = newNode;
-		*head_ref = newNode;
+	// If the list is empty, both front and back points to null
+	// If there is only one element, front points to it and back points
+	//  to null.
+	if (theHead == nullptr || theHead->next == nullptr) {
+		frontRef = theHead;
+		backRef = nullptr;
 	}
-
 	else {
-		current = *head_ref;
+		slow = theHead;
+		fast = theHead->next;
 
-		// locate the node after which the new node
-		// is to be inserted
-		while (current->next != NULL &&
-			current->next->type < newNode->type)
-			current = current->next;
+		// Fast advances 2 nodes while slow advances 1 node
+		while (fast != nullptr) {
+			fast = fast->next;
 
-		/*Make the appropriate links */
+			if (fast != nullptr) {
+				slow = slow->next;
+				fast = fast->next;
+			}
+		}
 
-		newNode->next = current->next;
+		// slow should be pointing right before midpoint. Split at this point
+		frontRef = theHead;
+		backRef = slow->next;
 
-		// if the new node is not inserted
-		// at the end of the list
-		if (current->next != NULL)
-			newNode->next->prev = newNode;
+		// Update the prev and next pointers
+		backRef->prev = nullptr;
+		slow->next = nullptr;
+	}
+}
 
-		current->next = newNode;
-		newNode->prev = current;
+
+void linked_list::sort(node*& theHead)
+{
+	node* a = nullptr;
+	node* b = nullptr;
+
+	// Base case
+	if (theHead == nullptr || theHead->next == nullptr) {
+		return;
+	}
+
+	// Split the list in half
+	// For odd number of nodes, the extra node will be in the first half.
+	frontBackSplit(theHead, a, b);
+
+	// Recursively break the list down until the sublist contains 1 element (Sorted)
+	sort(a);
+	sort(b);
+
+	// Merge the two sorted lists
+	theHead = sortedMerge(a, b);
+}
+
+
+node* linked_list::sortedMerge(node* a, node* b)
+{
+	node* headOfMerged;
+
+	// If one of the node is nullptr, return the other node
+	// No merging occurs this this case
+	if (a == nullptr) {
+		return b;
+	}
+	else if (b == nullptr) {
+		return a;
+	}
+
+	// First element in list, a, is less than the first element in b
+	if (a->name <= b->name) {
+		headOfMerged = a;
+
+		while (b != nullptr) {
+			if (a->name <= b->name) {
+				if (a->next == nullptr) {
+					a->next = b;
+					b->prev = a;
+					break;
+				}
+				a = a->next;
+			}
+			else {
+				node* toAdd = b;
+				b = b->next;
+				toAdd->prev = a->prev;
+				a->prev->next = toAdd;
+				toAdd->next = a;
+				a->prev = toAdd;
+			}
+		}
+	}
+	// First element in list, b, is less than the first element in a
+	else {
+		headOfMerged = b;
+
+		while (a != nullptr) {
+			if (b->name <= a->name) {
+				if (b->next == nullptr) {
+					b->next = a;
+					a->prev = b;
+					break;
+				}
+				b = b->next;
+			}
+			else {
+				node* toAdd = a;
+				a = a->next;
+				toAdd->prev = b->prev;
+				b->prev->next = toAdd;
+				toAdd->next = b;
+				b->prev = toAdd;
+			}
+		}
+	}
+
+	return headOfMerged;
+}
+
+
+void linked_list::sort()
+{
+	sort(head);
+
+	// After the merge sort, tail pointer will be pointing to incorrect node
+	// Update the tail (*** Need a better way to update tail ***)
+	node* findTail = head;
+	while (findTail != nullptr) {
+		if (findTail->next == nullptr) {
+			tail = findTail;
+		}
+
+		findTail = findTail->next;
 	}
 }
 
 
 
 
-// function to sort a doubly linked list using insertion sort
-void linked_list::insertionSort(node** head_ref)
+/// ////////////////////////////////////////////////////////////////////////
+
+
+
+void linked_list::frontBackSplitType(node* theHead, node*& frontRef, node*& backRef)
 {
-	// Initialize 'sorted' - a sorted doubly linked list
-	struct node* sorted = NULL;
+	node* fast;
+	node* slow;
 
-	// Traverse the given doubly linked list and
-	// insert every node to 'sorted'
-	struct node* current = *head_ref;
-	while (current != NULL) {
+	// If the list is empty, both front and back points to null
+	// If there is only one element, front points to it and back points
+	//  to null.
+	if (theHead == nullptr || theHead->next == nullptr) {
+		frontRef = theHead;
+		backRef = nullptr;
+	}
+	else {
+		slow = theHead;
+		fast = theHead->next;
 
-		// Store next for next iteration
-		struct node* next = current->next;
+		// Fast advances 2 nodes while slow advances 1 node
+		while (fast != nullptr) {
+			fast = fast->next;
 
-		// removing all the links so as to create 'current'
-		// as a new node for insertion
-		current->prev = current->next = NULL;
+			if (fast != nullptr) {
+				slow = slow->next;
+				fast = fast->next;
+			}
+		}
 
-		// insert current in 'sorted' doubly linked list
-		sortedInsert(&sorted, current);
+		// slow should be pointing right before midpoint. Split at this point
+		frontRef = theHead;
+		backRef = slow->next;
 
-		// Update current
-		current = next;
+		// Update the prev and next pointers
+		backRef->prev = nullptr;
+		slow->next = nullptr;
+	}
+}
+
+
+void linked_list::sortType(node*& theHead)
+{
+	node* a = nullptr;
+	node* b = nullptr;
+
+	// Base case
+	if (theHead == nullptr || theHead->next == nullptr) {
+		return;
 	}
 
-	// Update head_ref to point to sorted doubly linked list
-	*head_ref = sorted;
+	// Split the list in half
+	// For odd number of nodes, the extra node will be in the first half.
+	frontBackSplitType(theHead, a, b);
+
+	// Recursively break the list down until the sublist contains 1 element (Sorted)
+	sortType(a);
+	sortType(b);
+
+	// Merge the two sorted lists
+	theHead = sortedMergeType(a, b);
+}
+
+
+node* linked_list::sortedMergeType(node* a, node* b)
+{
+	node* headOfMerged;
+
+	// If one of the node is nullptr, return the other node
+	// No merging occurs this this case
+	if (a == nullptr) {
+		return b;
+	}
+	else if (b == nullptr) {
+		return a;
+	}
+
+	// First element in list, a, is less than the first element in b
+	if (a->type <= b->type) {
+		headOfMerged = a;
+
+		while (b != nullptr) {
+			if (a->type <= b->type) {
+				if (a->next == nullptr) {
+					a->next = b;
+					b->prev = a;
+					break;
+				}
+				a = a->next;
+			}
+			else {
+				node* toAdd = b;
+				b = b->next;
+				toAdd->prev = a->prev;
+				a->prev->next = toAdd;
+				toAdd->next = a;
+				a->prev = toAdd;
+			}
+		}
+	}
+	// First element in list, b, is less than the first element in a
+	else {
+		headOfMerged = b;
+
+		while (a != nullptr) {
+			if (b->type <= a->type) {
+				if (b->next == nullptr) {
+					b->next = a;
+					a->prev = b;
+					break;
+				}
+				b = b->next;
+			}
+			else {
+				node* toAdd = a;
+				a = a->next;
+				toAdd->prev = b->prev;
+				b->prev->next = toAdd;
+				toAdd->next = b;
+				b->prev = toAdd;
+			}
+		}
+	}
+
+	return headOfMerged;
+}
+
+
+void linked_list::sortType()
+{
+	sortType(head);
+
+	// After the merge sort, tail pointer will be pointing to incorrect node
+	// Update the tail (*** Need a better way to update tail ***)
+	node* findTail = head;
+	while (findTail != nullptr) {
+		if (findTail->next == nullptr) {
+			tail = findTail;
+		}
+
+		findTail = findTail->next;
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+void linked_list::frontBackSplitWet(node* theHead, node*& frontRef, node*& backRef)
+{
+	node* fast;
+	node* slow;
+
+	// If the list is empty, both front and back points to null
+	// If there is only one element, front points to it and back points
+	//  to null.
+	if (theHead == nullptr || theHead->next == nullptr) {
+		frontRef = theHead;
+		backRef = nullptr;
+	}
+	else {
+		slow = theHead;
+		fast = theHead->next;
+
+		// Fast advances 2 nodes while slow advances 1 node
+		while (fast != nullptr) {
+			fast = fast->next;
+
+			if (fast != nullptr) {
+				slow = slow->next;
+				fast = fast->next;
+			}
+		}
+
+		// slow should be pointing right before midpoint. Split at this point
+		frontRef = theHead;
+		backRef = slow->next;
+
+		// Update the prev and next pointers
+		backRef->prev = nullptr;
+		slow->next = nullptr;
+	}
+}
+
+
+void linked_list::sortWet(node*& theHead)
+{
+	node* a = nullptr;
+	node* b = nullptr;
+
+	// Base case
+	if (theHead == nullptr || theHead->next == nullptr) {
+		return;
+	}
+
+	// Split the list in half
+	// For odd number of nodes, the extra node will be in the first half.
+	frontBackSplitWet(theHead, a, b);
+
+	// Recursively break the list down until the sublist contains 1 element (Sorted)
+	sortWet(a);
+	sortWet(b);
+
+	// Merge the two sorted lists
+	theHead = sortedMergeWet(a, b);
+}
+
+
+node* linked_list::sortedMergeWet(node* a, node* b)
+{
+	node* headOfMerged;
+
+	// If one of the node is nullptr, return the other node
+	// No merging occurs this this case
+	if (a == nullptr) {
+		return b;
+	}
+	else if (b == nullptr) {
+		return a;
+	}
+
+	// First element in list, a, is less than the first element in b
+	if (a->wet <= b->wet) {
+		headOfMerged = a;
+
+		while (b != nullptr) {
+			if (a->wet <= b->wet) {
+				if (a->next == nullptr) {
+					a->next = b;
+					b->prev = a;
+					break;
+				}
+				a = a->next;
+			}
+			else {
+				node* toAdd = b;
+				b = b->next;
+				toAdd->prev = a->prev;
+				a->prev->next = toAdd;
+				toAdd->next = a;
+				a->prev = toAdd;
+			}
+		}
+	}
+	// First element in list, b, is less than the first element in a
+	else {
+		headOfMerged = b;
+
+		while (a != nullptr) {
+			if (b->wet <= a->wet) {
+				if (b->next == nullptr) {
+					b->next = a;
+					a->prev = b;
+					break;
+				}
+				b = b->next;
+			}
+			else {
+				node* toAdd = a;
+				a = a->next;
+				toAdd->prev = b->prev;
+				b->prev->next = toAdd;
+				toAdd->next = b;
+				b->prev = toAdd;
+			}
+		}
+	}
+
+	return headOfMerged;
+}
+
+
+void linked_list::sortWet()
+{
+	sortWet(head);
+
+	// After the merge sort, tail pointer will be pointing to incorrect node
+	// Update the tail (*** Need a better way to update tail ***)
+	node* findTail = head;
+	while (findTail != nullptr) {
+		if (findTail->next == nullptr) {
+			tail = findTail;
+		}
+
+		findTail = findTail->next;
+	}
+}
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+void linked_list::frontBackSplitCoef(node* theHead, node*& frontRef, node*& backRef)
+{
+	node* fast;
+	node* slow;
+
+	// If the list is empty, both front and back points to null
+	// If there is only one element, front points to it and back points
+	//  to null.
+	if (theHead == nullptr || theHead->next == nullptr) {
+		frontRef = theHead;
+		backRef = nullptr;
+	}
+	else {
+		slow = theHead;
+		fast = theHead->next;
+
+		// Fast advances 2 nodes while slow advances 1 node
+		while (fast != nullptr) {
+			fast = fast->next;
+
+			if (fast != nullptr) {
+				slow = slow->next;
+				fast = fast->next;
+			}
+		}
+
+		// slow should be pointing right before midpoint. Split at this point
+		frontRef = theHead;
+		backRef = slow->next;
+
+		// Update the prev and next pointers
+		backRef->prev = nullptr;
+		slow->next = nullptr;
+	}
+}
+
+
+void linked_list::sortPopulation(node*& theHead)
+{
+	node* a = nullptr;
+	node* b = nullptr;
+
+	// Base case
+	if (theHead == nullptr || theHead->next == nullptr) {
+		return;
+	}
+
+	// Split the list in half
+	// For odd number of nodes, the extra node will be in the first half.
+	frontBackSplitCoef(theHead, a, b);
+
+	// Recursively break the list down until the sublist contains 1 element (Sorted)
+	sortPopulation(a);
+	sortPopulation(b);
+
+	// Merge the two sorted lists
+	theHead = sortedMergeCoef(a, b);
+}
+
+
+node* linked_list::sortedMergeCoef(node* a, node* b)
+{
+	node* headOfMerged;
+
+	// If one of the node is nullptr, return the other node
+	// No merging occurs this this case
+	if (a == nullptr) {
+		return b;
+	}
+	else if (b == nullptr) {
+		return a;
+	}
+
+	// First element in list, a, is less than the first element in b
+	if (a->coef <= b->coef) {
+		headOfMerged = a;
+
+		while (b != nullptr) {
+			if (a->coef <= b->coef) {
+				if (a->next == nullptr) {
+					a->next = b;
+					b->prev = a;
+					break;
+				}
+				a = a->next;
+			}
+			else {
+				node* toAdd = b;
+				b = b->next;
+				toAdd->prev = a->prev;
+				a->prev->next = toAdd;
+				toAdd->next = a;
+				a->prev = toAdd;
+			}
+		}
+	}
+	// First element in list, b, is less than the first element in a
+	else {
+		headOfMerged = b;
+
+		while (a != nullptr) {
+			if (b->coef <= a->coef) {
+				if (b->next == nullptr) {
+					b->next = a;
+					a->prev = b;
+					break;
+				}
+				b = b->next;
+			}
+			else {
+				node* toAdd = a;
+				a = a->next;
+				toAdd->prev = b->prev;
+				b->prev->next = toAdd;
+				toAdd->next = b;
+				b->prev = toAdd;
+			}
+		}
+	}
+
+	return headOfMerged;
+}
+
+
+void linked_list::sortCoef()
+{
+	sortPopulation(head);
+
+	// After the merge sort, tail pointer will be pointing to incorrect node
+	// Update the tail (*** Need a better way to update tail ***)
+	node* findTail = head;
+	while (findTail != nullptr) {
+		if (findTail->next == nullptr) {
+			tail = findTail;
+		}
+
+		findTail = findTail->next;
+	}
 }

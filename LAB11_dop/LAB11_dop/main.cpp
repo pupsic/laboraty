@@ -228,6 +228,7 @@ int main() {
 					cin >> b;
 					sum = SUM(a, b);
 					SUM* Psum = &sum;
+					
 				}
 				if (index == 3) {
 					system("cls");

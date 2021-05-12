@@ -18,11 +18,27 @@ private:
 
 	node* head = NULL;
 	node* tail = NULL;
+
+	void frontBackSplit(node* theHead, node*& frontRef, node*& backRef);
+	void sort(node*& theHead);
+	node* sortedMerge(node* a, node* b);
+
+	void frontBackSplitType(node* theHead, node*& frontRef, node*& backRef);
+	void sortType(node*& theHead);
+	node* sortedMergeType(node* a, node* b);
+
+	void frontBackSplitWet(node* theHead, node*& frontRef, node*& backRef);
+	void sortWet(node*& theHead);
+	node* sortedMergeWet(node* a, node* b);
+
+	void frontBackSplitCoef(node* theHead, node*& frontRef, node*& backRef);
+	void sortPopulation(node*& theHead);
+	node* sortedMergeCoef(node* a, node* b);
 public:
-	void bubbleSort(struct node* start);
-	void bubbleSortType(struct node* start);
-	void bubbleSortWet(struct node* start);
-	void bubbleSortCoef(struct node* start);
+	void sort();
+	void sortType();
+	void sortWet();
+	void sortCoef();
 	int GetSize();
 	void insert_front(struct node** head);
 	void PrintStart();
